@@ -34,7 +34,7 @@ def extract_text(filename,output_as_list=False):
         for bt in paper_content['body_text']:
             body_text = body_text + bt['text']
 
-
+    #return
     if output_as_list:
             return [paper_id,title.lower(),abstract.lower(),body_text.lower()]
     else:
