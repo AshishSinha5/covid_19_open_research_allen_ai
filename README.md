@@ -33,7 +33,12 @@ python extract_data.py
 4. Preprocess the text corpus - 
 <pre><code>
 python preprocess_data.py
-</pre></code>
+</code></pre>
+5. Create the fourgram and trigram model and calculate evaluation metric - 
+<pre><code>
+python ngram_model.py
+</code></pre>
+
 
 ## Preprocessing Steps
 
@@ -90,3 +95,61 @@ The best language model is one that best predicts an unseen test set. We'll use 
 |Trigram|103.18|
 |Fourgram|83.22|
 
+We can see that the perplexity value of fourgram model is less than that of trigram, indicating that the fourgram model 
+performs better than the trigram model on the test set.
+
+## Word Similarity and Knowledge Graph
+
+As the amount of literature grows it becomes increasingly harder to make a new discovery, concepts become more scattered,
+especially when there is growing number of scientific journals and readily available research content on the internet.<br>
+
+Reading all that stuff and filtering unimportant information is almost impossible for a single 
+individual. If only we could have a system that can look at all this data globally, find hidden connections/relations and
+present those findings to us. We have **Word2Vec** to our rescue. 
+
+Word2vec takes as its input a large corpus of text and produces a vector space, typically of several hundred dimensions,
+with each unique word in the corpus being assigned a corresponding vector in the space. Word vectors are positioned in 
+the vector space such that words that share common contexts in the corpus are located in close proximity to one another 
+in the space. We'll see how we can discover relationships between words in our corpus
+
+### Preprocessing 
+
+Before we can run Word2Vec algorithm on our test corpus we would need to pre-process it. We take the following steps - 
+
+1. **Remove Stopwords** -  as they do not provide any extra information for the word2vec model and word similarity
+2. **Lemmatization** - words like “are, is, being” and plurals, etc. are transformed “be”, signular and so on.  
+3. **Remove Small sentences** -  sentences of less than 5 tokens(words) as not considered in making word vectors
+
+### Computing Word Vectors
+
+Running the algorithm from **gensim** package on 8194615 sentences containing 106333038 raw words resulted in 836047 
+unique word vectors (read vocabulary) of dimension 100. Extracting the top 5 most similar words for some of the tokens 
+gave the following results.
+
+1. Source word - "fever" <br>
+   Results - ['fever', 'pyrexia', 'chill', 'febrile', 'paroxysm', 'myalgia'] <br>
+   We get words relating to fever and muscle pain, which are reseonably similar to the word fever.
+   
+2. Source word - "fatal" <br>
+   Results - ['fatal', 'severe', 'lifethreatening', 'fulminating', 'fulminant', 'lethal']
+
+3. Source word - "antigen" <br>
+   Results - ['antigen', 'autoantigens', 'apc', 'antibody', 'glycoprotein', 'selfantigens']
+
+4. Source word - "corona" <br>
+   Results - ['corona', 'coronavirus', 'oronavirus', 'borna', 'ebola', 'deadly']
+
+### Knowledge Graph on a set of tokens
+
+The next important piece of the puzzle is to find how well a keyword is connected with other keywords. Here, we want to 
+use the Graph to structure the connected keywords. It allows us to represent the connections in a structured way. It is 
+also possible to filter the connections by studying the edges of the nodes (representing the relationship of the keyword) 
+and the nodes representing the keywords. We'll use networkx library to construct our graph.
+
+Full graph can be accessed from [here](https://drive.google.com/file/d/1qW9aUbv3-PKf6le0wzytFwPqu2lXaCTd/view?usp=sharing).
+Some of the areas of graphs are shown below - 
+
+
+## Charecter Level RNN
+
+TODO
