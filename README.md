@@ -150,6 +150,15 @@ Full graph can be accessed from [here](https://drive.google.com/file/d/1qW9aUbv3
 Some of the areas of graphs are shown below - 
 
 
+<p align="center">
+  <img width="460" height="300" src="https://github.com/AshishSinha5/covid_19_open_research_allen_ai/blob/master/figures/graph_1.PNG">
+</p>
+
+
+<p align="center">
+  <img width="460" height="300" src="https://github.com/AshishSinha5/covid_19_open_research_allen_ai/blob/master/figures/graph2.PNG">
+</p>
+
 ## Charecter Level RNN
 
 TODO
